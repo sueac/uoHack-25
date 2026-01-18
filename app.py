@@ -9,7 +9,6 @@ from mutagen.mp3 import MP3
 
 is_paused = False
 audio_started = threading.Event()
-word_delay_ms = 180
 current_highlight = None
 
 
@@ -19,6 +18,8 @@ load_dotenv()
 client = ElevenLabs(api_key=os.getenv("API_KEY"))
 
 pygame.mixer.init()
+
+
 
 def generate_and_play_audio(text):
     global word_delay_ms
@@ -54,8 +55,11 @@ def upload_file():
         filetypes=[("Text files", "*.txt"), ("All files", "*.*")]
     )
 
+    
+
     if not file_path:
         return
+    
 
     with open(file_path, 'r', encoding='utf-8') as file:
         text = file.read()
